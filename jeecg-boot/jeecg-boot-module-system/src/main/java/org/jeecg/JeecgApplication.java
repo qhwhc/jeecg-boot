@@ -14,7 +14,6 @@ import java.net.UnknownHostException;
 @Slf4j
 @EnableSwagger2
 @SpringBootApplication
-@EnableAutoConfiguration
 public class JeecgApplication {
 
   public static void main(String[] args) throws UnknownHostException {

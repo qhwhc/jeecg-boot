@@ -3,7 +3,10 @@ package org.jeecg.modules.system.service.impl;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import javafx.scene.control.MultipleSelectionModel;
 import org.jeecg.modules.system.entity.SysRole;
 import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.system.entity.SysUserRole;
@@ -31,7 +34,9 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
 	private ISysUserService userService;
 	@Autowired
 	private ISysRoleService roleService;
-	
+	@Autowired
+	private SysUserRoleMapper sysUserRoleMapper;
+
 	/**
 	 * 查询所有用户对应的角色信息
 	 */
@@ -59,7 +64,13 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
 		}
 		return map;
 	}
-	
+
+	@Override
+	public List<SysUser> getUsersByRole(SysRole sysRole) {
+		return sysUserRoleMapper.getUsersByRole(sysRole);
+	}
+
+
 	/**
 	 * queryUserRole调用的方法
 	 * @param roleList
