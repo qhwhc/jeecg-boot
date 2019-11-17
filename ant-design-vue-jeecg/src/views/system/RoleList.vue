@@ -10,6 +10,7 @@
             <a-form-item label="名称" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
               <a-input placeholder="请输入名称查询" v-model="queryParam.roleName"></a-input>
             </a-form-item>
+            
           </a-col>
           <a-col :md="10" :sm="12">
             <a-form-item label="创建时间" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
@@ -75,6 +76,9 @@
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
+                <a @click="handleUser(record)">用户</a>
+              </a-menu-item>
+              <a-menu-item>
                 <a @click="handlePerssion(record.id)">授权</a>
               </a-menu-item>
               <a-menu-item>
@@ -94,12 +98,14 @@
     <!-- 表单区域 -->
     <role-modal ref="modalForm" @ok="modalFormOk"></role-modal>
     <user-role-modal ref="modalUserRole"></user-role-modal>
+    <user-edit ref="modalUserEdit"></user-edit>
   </a-card>
 </template>
 
 <script>
   import RoleModal from './modules/RoleModal'
   import UserRoleModal from './modules/UserRoleModal'
+  import UserEdit from './modules/UserEdit'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import JDate from '@/components/jeecg/JDate'
 
@@ -109,7 +115,8 @@
     components: {
       RoleModal,
       UserRoleModal,
-      JDate
+      JDate,
+      UserEdit
     },
     data () {
       return {
@@ -185,6 +192,11 @@
       onChangeDate(date, dateString) {
         console.log(date, dateString);
       },
+      handleUser(data) {
+        console.log(data)
+        this.$refs.modalUserEdit.show(data);
+
+      }
     }
   }
 </script>
